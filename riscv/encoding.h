@@ -155,6 +155,8 @@
 #define CLINT_SIZE         0x000c0000
 #define EXT_IO_BASE        0x40000000
 #define DRAM_BASE          0x80000000
+#define NIC_BASE           0x10057000 
+#define NIC_SIZE           0x00001000
 
 // page table entry (PTE) fields
 #define PTE_V     0x001 // Valid

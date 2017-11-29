@@ -45,6 +45,9 @@ sim_t::sim_t(const char* isa, size_t nprocs, bool halted, reg_t start_pc,
 
   clint.reset(new clint_t(procs));
   bus.add_device(CLINT_BASE, clint.get());
+ 
+  nic.reset(new nic_t(this));
+  bus.add_device(NIC_BASE, nic.get());
 }
 
 sim_t::~sim_t()
