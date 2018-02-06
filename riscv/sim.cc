@@ -23,15 +23,26 @@ static void handle_signal(int sig)
   signal(sig, &handle_signal);
 }
 
+const std::vector<std::string>& sim_t::getargs(const std::vector<std::string>& args){
+   std::cerr << "kaifei" << std::endl;
+   return args;
+}
+
+sim_t* sim_t::getThis() {
+  std::cerr << "kaifei" << std::endl;
+  return this;
+}
+
 sim_t::sim_t(const char* isa, size_t nprocs, bool halted, reg_t start_pc,
              std::vector<std::pair<reg_t, mem_t*>> mems,
              const std::vector<std::string>& args)
-  : htif_t(args), debug_module(this), mems(mems), procs(std::max(nprocs, size_t(1))),
-    start_pc(start_pc),
-    current_step(0), current_proc(0), debug(false), remote_bitbang(NULL)
-{
-  signal(SIGINT, &handle_signal);
 
+:htif_t(args), debug_module(this), mems(mems), procs(std::max(nprocs, size_t(1))),
+    start_pc(start_pc),
+    current_step(0), current_proc(0), debug(false), remote_bitbang(NULL){
+  signal(SIGINT, &handle_signal);
+  int array[4];
+  array[5] = 10;
   for (auto& x : mems)
     bus.add_device(x.first, x.second);
 

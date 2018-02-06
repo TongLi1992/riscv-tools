@@ -12,7 +12,7 @@
 #include <vector>
 #include <string>
 #include <memory>
-
+#include <iostream>
 static void help()
 {
   fprintf(stderr, "usage: spike [host options] <target program> [target options]\n");
@@ -85,6 +85,7 @@ int main(int argc, char** argv)
   uint16_t rbb_port = 0;
   bool use_rbb = false;
 
+
   option_parser_t parser;
   parser.help(&help);
   parser.option('h', 0, 0, [&](const char* s){help();});
@@ -116,6 +117,7 @@ int main(int argc, char** argv)
   if (mems.empty())
     mems = make_mems("2048");
 
+  
   sim_t s(isa, nprocs, halted, start_pc, mems, htif_args);
   std::unique_ptr<remote_bitbang_t> remote_bitbang((remote_bitbang_t *) NULL);
   std::unique_ptr<jtag_dtm_t> jtag_dtm(new jtag_dtm_t(&s.debug_module));

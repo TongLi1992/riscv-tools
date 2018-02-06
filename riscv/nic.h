@@ -26,7 +26,7 @@
 
 #define nic_err(M, ...) fprintf(stderr, "SPIKE NIC: " M, ##__VA_ARGS__)
 
-#define DEFAULT_INTERFACE_NAME "eth0"
+#define DEFAULT_INTERFACE_NAME "lo"
 
 #define RECEIVE_BUFFER_SIZE_BYTES 1500
 #define NUM_OF_RECEIVE_BUFFER 15
@@ -57,7 +57,7 @@ class nic_t : public abstract_device_t {
     sim_t *_sim;
     //pair(int:length of data received, const unsigned char*:address of the recived data stored)
     std::vector<std::pair<int, uintptr_t>> _recv_buffer;    
-    char *_real_recv_buffer;
+    char _real_recv_buffer[RECEIVE_BUFFER_SIZE_BYTES];
     unsigned int _recv_slot_count;
     unsigned int _send_slot_count;
     unsigned int _recv_comp_count;
